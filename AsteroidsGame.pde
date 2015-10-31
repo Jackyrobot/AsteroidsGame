@@ -1,15 +1,53 @@
 //your variable declarations here
+SpaceShip milleniumFalcon;
 public void setup() 
 {
-  //your code here
+  milleniumFalcon = new SpaceShip();
 }
 public void draw() 
 {
-  //your code here
+  milleniumFalcon.show();
 }
-class SpaceShip //extends Floater  
+class SpaceShip extends Floater  
 {   
-    //your code here
+  public SpaceShip()
+  {
+    corners = 9;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = 0; yCorners[0] = -8;
+    xCorners[1] = -6; yCorners[1] = -6;
+    xCorners[2] = -8; yCorners[2] = 0;
+    xCorners[3] = -6; yCorners[3] = 6;
+    xCorners[4] = 0; yCorners[4] = 8;
+    xCorners[5] = 6; yCorners[5] = 6;
+    xCorners[6] = 14; yCorners[6] = 4;
+    xCorners[7] = 14; yCorners[7] = 2;
+    xCorners[8] = 7; yCorners[8] = 2;
+    xCorners[9] = 8; yCorners[9] = 0;
+    xCorners[10] = 7; yCorners[10] = -2;
+    xCorners[11] = 14; yCorners[11] = -2;
+    xCorners[12] = 14; yCorners[12] = -4;
+    xCorners[13] = 6; yCorners[13] = -6;
+    myColor = color(78,106,240);
+    //coordinates
+    myCenterX = (int)width/2;
+    myCenterY = (int)height/2;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}   
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -35,7 +73,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians = myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
@@ -52,7 +90,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if(myCenterX >width)
+    if(myCenterX > width)
     {     
       myCenterX = 0;    
     }    
@@ -60,7 +98,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     {     
       myCenterX = width;    
     }    
-    if(myCenterY >height)
+    if(myCenterY > height)
     {    
       myCenterY = 0;    
     }   
