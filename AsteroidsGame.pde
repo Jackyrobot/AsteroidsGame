@@ -1,18 +1,23 @@
 //your variable declarations here
+
 SpaceShip milleniumFalcon;
 public void setup() 
 {
+  size(600,600);
+  background(0);
   milleniumFalcon = new SpaceShip();
 }
 public void draw() 
 {
+  background(0);
   milleniumFalcon.show();
+  milleniumFalcon.move();
 }
 class SpaceShip extends Floater  
 {   
   public SpaceShip()
   {
-    corners = 9;
+    corners = 14;
     xCorners = new int[corners];
     yCorners = new int[corners];
     xCorners[0] = 0; yCorners[0] = -8;
@@ -29,7 +34,7 @@ class SpaceShip extends Floater
     xCorners[11] = 14; yCorners[11] = -2;
     xCorners[12] = 14; yCorners[12] = -4;
     xCorners[13] = 6; yCorners[13] = -6;
-    myColor = color(78,106,240);
+    myColor = color(151,151,151);
     //coordinates
     myCenterX = (int)width/2;
     myCenterY = (int)height/2;
@@ -83,7 +88,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     //rotates the floater by a given number of degrees    
     myPointDirection+=nDegreesOfRotation;   
   }   
-  public void move ()   //move the floater in the current direction of travel
+  public void move () //move the floater in the current direction of travel
   {      
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
@@ -125,4 +130,25 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
+
+class Star
+{
+  private double myX, myY;
+  private int myColor;
+  public Star()
+  {
+
+  }
+}
+
+public void keyPressed()
+{
+  if(key == CODED) 
+  {
+    if(keyCode == UP) milleniumFalcon.accelerate(0.2);
+    if(keyCode == DOWN) milleniumFalcon.accelerate(-0.2);
+    if(keyCode == LEFT) milleniumFalcon.rotate(-15);
+    if(keyCode == RIGHT) milleniumFalcon.rotate(15);
+  }
+}
 
