@@ -1,15 +1,20 @@
 //your variable declarations here
-
+Star [] starfield;
 SpaceShip milleniumFalcon;
 public void setup() 
 {
   size(600,600);
   background(0);
   milleniumFalcon = new SpaceShip();
+  starfield = new Star[175];
+  for(int i = 0; i < starfield.length; i++)
+    starfield[i] = new Star();
 }
 public void draw() 
 {
   background(0);
+  for(int i = 0; i < starfield.length; i++)
+    starfield[i].show();
   milleniumFalcon.show();
   milleniumFalcon.move();
 }
@@ -50,7 +55,7 @@ class SpaceShip extends Floater
   public double getDirectionX(){return myDirectionX;}
   public void setDirectionY(double y){myDirectionY = y;}
   public double getDirectionY(){return myDirectionY;}
-  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public void setPointDirection(double degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}   
 
 }
@@ -71,7 +76,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   abstract public double getDirectionX();   
   abstract public void setDirectionY(double y);   
   abstract public double getDirectionY();   
-  abstract public void setPointDirection(int degrees);   
+  abstract public void setPointDirection(double degrees);   
   abstract public double getPointDirection(); 
 
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
@@ -83,7 +88,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
-  public void rotate (int nDegreesOfRotation)   
+  public void rotate (double nDegreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
     myPointDirection+=nDegreesOfRotation;   
@@ -133,11 +138,18 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 
 class Star
 {
-  private double myX, myY;
-  private int myColor;
+  private int myX, myY;
+  private double mySize;
   public Star()
   {
-
+    myX = (int)(Math.random()*600);
+    myY = (int)(Math.random()*600);
+    mySize = Math.random()*2+1;
+  }
+  public void show()
+  {
+    fill(255);
+    ellipse(myX, myY, (float)mySize, (float)mySize);
   }
 }
 
@@ -150,5 +162,5 @@ public void keyPressed()
     if(keyCode == LEFT) milleniumFalcon.rotate(-15);
     if(keyCode == RIGHT) milleniumFalcon.rotate(15);
   }
-}
 
+}
