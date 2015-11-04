@@ -160,6 +160,14 @@ public void keyPressed()
     if(keyCode == LEFT) leftKey = true;
     if(keyCode == RIGHT) rightKey = true;
   }
+  if(key == 'z') 
+  {
+    milleniumFalcon.setX((int)(Math.random()*600));
+    milleniumFalcon.setY((int)(Math.random()*600));
+    milleniumFalcon.setPointDirection(Math.random()*360);
+    milleniumFalcon.setDirectionX(0);
+    milleniumFalcon.setDirectionY(0);
+  }
 }
 
 public void keyReleased()
@@ -169,3 +177,4 @@ public void keyReleased()
   if (keyCode == RIGHT) rightKey = false;
   if (keyCode == DOWN) downKey = false;
 }
+
