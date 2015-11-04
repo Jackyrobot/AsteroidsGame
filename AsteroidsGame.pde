@@ -1,6 +1,10 @@
 //your variable declarations here
 Star [] starfield;
 SpaceShip milleniumFalcon;
+public boolean upKey = false;
+public boolean leftKey = false;
+public boolean rightKey = false;
+public boolean downKey = false;
 public void setup() 
 {
   size(600,600);
@@ -17,6 +21,10 @@ public void draw()
     starfield[i].show();
   milleniumFalcon.show();
   milleniumFalcon.move();
+  if(upKey == true) milleniumFalcon.accelerate(Math.random()*0.18);
+  if(downKey == true) milleniumFalcon.accelerate(Math.random()*-0.18);
+  if(leftKey == true) milleniumFalcon.rotate(-5);
+  if(rightKey == true) milleniumFalcon.rotate(5);
 }
 class SpaceShip extends Floater  
 {   
@@ -57,7 +65,6 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(double degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}   
-
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -78,7 +85,6 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   abstract public double getDirectionY();   
   abstract public void setPointDirection(double degrees);   
   abstract public double getPointDirection(); 
-
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
   {          
@@ -100,22 +106,14 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if(myCenterX > width)
-    {     
-      myCenterX = 0;    
-    }    
+    if(myCenterX > width)    
+      myCenterX = 0;       
     else if (myCenterX<0)
-    {     
-      myCenterX = width;    
-    }    
-    if(myCenterY > height)
-    {    
+      myCenterX = width;        
+    if(myCenterY > height)  
       myCenterY = 0;    
-    }   
-    else if (myCenterY < 0)
-    {     
-      myCenterY = height;    
-    }   
+    else if (myCenterY < 0)    
+      myCenterY = height;      
   }   
   public void show ()  //Draws the floater at the current position  
   {             
@@ -157,10 +155,17 @@ public void keyPressed()
 {
   if(key == CODED) 
   {
-    if(keyCode == UP) milleniumFalcon.accelerate(0.2);
-    if(keyCode == DOWN) milleniumFalcon.accelerate(-0.2);
-    if(keyCode == LEFT) milleniumFalcon.rotate(-15);
-    if(keyCode == RIGHT) milleniumFalcon.rotate(15);
+    if(keyCode == UP) upKey = true;
+    if(keyCode == DOWN) downKey = true;
+    if(keyCode == LEFT) leftKey = true;
+    if(keyCode == RIGHT) rightKey = true;
   }
+}
 
+public void keyReleased()
+{
+  if (keyCode == UP) upKey = false;
+  if (keyCode == LEFT) leftKey = false;
+  if (keyCode == RIGHT) rightKey = false;
+  if (keyCode == DOWN) downKey = false;
 }
