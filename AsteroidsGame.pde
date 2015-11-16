@@ -59,7 +59,7 @@ class SpaceShip extends Floater
     xCorners[11] = 14; yCorners[11] = -2;
     xCorners[12] = 14; yCorners[12] = -4;
     xCorners[13] = 6; yCorners[13] = -6;
-    myColor = color(255,0,0);
+    myColor = color(151,151,151);
     //coordinates
     myCenterX = (int)width/2;
     myCenterY = (int)height/2;
@@ -81,24 +81,36 @@ class SpaceShip extends Floater
 
 class Asteroid extends Floater
 {
-  private int rotSpeed;
+  private int rotSpeed, mySize;
   public Asteroid()
-  {
-    corners = 6;
-    xCorners = new int[corners]; yCorners = new int[corners];
-    xCorners[0] = -11; yCorners[0] = -8;
-    xCorners[1] = 7; yCorners[1] = -8; 
-    xCorners[2] = 13; yCorners[2] = 0;
-    xCorners[3] = 6; yCorners[3] = 10;
-    xCorners[4] = -11; yCorners[4] = 8; 
-    xCorners[5] = -5; yCorners[5] = 0;
-    myColor = color(151,151,151);
-    rotSpeed = (int)(Math.random()*8)+2;
+  { 
+    // corners = 6;
+    // xCorners = new int[corners]; yCorners = new int[corners];
+    // xCorners[0] = -(int)(1.3*Math.random()*10+9); yCorners[0] = -(int)(1.3*Math.random()*4+7);
+    // xCorners[1] = 7; yCorners[1] = -8; 
+    // xCorners[2] = (int)(1.3*Math.random()*6+10); yCorners[2] = (int)(1.3*Math.random()*6-3);
+    // xCorners[3] = (int)(1.3*Math.random()*4+5); yCorners[3] = (int)(1.3*Math.random()*10+9);
+    // xCorners[4] = (int)(-3*1.3); yCorners[4] = (int)(1.3*8); 
+    // xCorners[5] = -(int)(1.3*Math.random()*10+3); yCorners[5] = (int)(1.3*Math.random()*10-5);
+    mySize = (int)(Math.random()*0.01*width)+4; 
+    corners = (int)(Math.random()*4)+4; 
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    //coordinates for the corners of ship
+    for (int i = 0; i < corners; i++)
+    {
+      int randomizer = (int)(Math.random()*1)+1; //puts points in random places
+      xCorners[i] = 3*(int)(randomizer*mySize*Math.cos(i*(2*Math.PI/(1*corners)))); //randomly chooses, starting from zero degrees
+      yCorners[i] = 3*(int)(randomizer*mySize*Math.sin(i*(2*Math.PI/(1*corners)))); //goes around the backwards unit circle
+    }
+
+    myColor = color(120,80,55);
+    rotSpeed = (int)(Math.random()*6)+2;
     myCenterX = (int)(Math.random()*600);
     myCenterY = (int)(Math.random()*600);
-    myDirectionX = Math.random()*6;
-    myDirectionY = Math.random()*6;
-    myPointDirection = (Math.random()*360);
+    myDirectionX = Math.random()*4-2;
+    myDirectionY = Math.random()*4-2;
+    myPointDirection = (Math.random()*360-180);
 
   }
   public void move()
@@ -194,11 +206,12 @@ class Star
   {
     myX = (int)(Math.random()*600);
     myY = (int)(Math.random()*600);
-    mySize = Math.random()*2+1;
+    mySize = Math.random()*4+1;
   }
   public void show()
   {
-    fill(255);
+    noStroke();
+    fill(255,255,255,random(40,100));
     ellipse(myX, myY, (float)mySize, (float)mySize);
   }
 }
@@ -229,4 +242,3 @@ public void keyReleased()
   if (keyCode == RIGHT) rightKey = false;
   if (keyCode == DOWN) downKey = false;
 }
-
