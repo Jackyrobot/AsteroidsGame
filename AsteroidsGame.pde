@@ -1,7 +1,8 @@
 //your variable declarations here
 Star [] starfield;
 SpaceShip milleniumFalcon;
-Asteroid[] asteroids;
+//Asteroid[] asteroids;
+ArrayList <Asteroid> asteroidList;
 public boolean upKey = false;
 public boolean leftKey = false;
 public boolean rightKey = false;
@@ -13,11 +14,14 @@ public void setup()
   background(0);
   milleniumFalcon = new SpaceShip();
   starfield = new Star[175];
-  asteroids = new Asteroid[10];
+  //asteroids = new Asteroid[10];
+  asteroidList = new ArrayList <Asteroid> ();
   for(int i = 0; i < starfield.length; i++) 
     starfield[i] = new Star();
-  for(int j = 0; j < asteroids.length; j++)
-    asteroids[j] = new Asteroid();
+  //for(int j = 0; j < asteroids.length; j++)
+  //  asteroids[j] = new Asteroid();
+  for(int j = 0; j < 10; j++)
+    asteroidList.add(j, new Asteroid());
 }
 
 public void draw() 
@@ -25,10 +29,10 @@ public void draw()
   background(0);
   for(int i = 0; i < starfield.length; i++)
     starfield[i].show();
-  for(int j = 0; j < asteroids.length; j++)
+  for(int j = 0; j < asteroidList.size(); j++)
   {  
-    asteroids[j].move();
-    asteroids[j].show();
+    asteroidList.get(j).move();
+    asteroidList.get(j).show();
   }
   milleniumFalcon.show();
   milleniumFalcon.move();
@@ -36,6 +40,14 @@ public void draw()
   if(downKey == true) milleniumFalcon.accelerate(Math.random()*-0.18);
   if(leftKey == true) milleniumFalcon.rotate(-5);
   if(rightKey == true) milleniumFalcon.rotate(5);
+  for(int i = 0; i < asteroidList.size(); i++)
+  {
+    if( dist(asteroidList.get(i).getX(), asteroidList.get(i).getY(), milleniumFalcon.getX(), milleniumFalcon.getY())<20 )
+      asteroidList.remove(i);
+  }
+  if(asteroidList.size()<1)
+    setup();
+
 }
 
 class SpaceShip extends Floater  
