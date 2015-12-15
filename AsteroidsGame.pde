@@ -53,7 +53,7 @@ public void draw()
   if(rightKey == true) milleniumFalcon.turn(5);
   for(int i = 0; i < asteroidList.size(); i++)
   {
-    if(dist(asteroidList.get(i).getX(), asteroidList.get(i).getY(), milleniumFalcon.getX(), milleniumFalcon.getY())<32)
+    if(dist(asteroidList.get(i).getX(), asteroidList.get(i).getY(), milleniumFalcon.getX(), milleniumFalcon.getY())<30)
     {
       //asteroidList.remove(i);
       //gameOver = true;
