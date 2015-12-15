@@ -14,7 +14,7 @@ public int shipDamage = 0;
 
 public void setup() 
 {
-  size(600,600,P2D);
+  size(600,600);
   background(0);
   milleniumFalcon = new SpaceShip();
   starfield = new Star[175];
@@ -201,8 +201,8 @@ class Bullet extends Floater
     myCenterY = theShip.myCenterY;
     myPointDirection = theShip.myPointDirection;
     dRadians = myPointDirection*(Math.PI/180);
-    myDirectionX = 16 * Math.cos(dRadians) + theShip.myDirectionX;
-    myDirectionY = 16 * Math.sin(dRadians) + theShip.myDirectionY;
+    myDirectionX = 13 * Math.cos(dRadians) + theShip.myDirectionX;
+    myDirectionY = 13 * Math.sin(dRadians) + theShip.myDirectionY;
   }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}
